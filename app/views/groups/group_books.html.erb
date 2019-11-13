@@ -1,0 +1,37 @@
+<% provide(:title, 'Books in group') %>
+
+<div class="container">
+  <h1>Group: <%= @group.name %></h1>
+  <ul class="list-group list-group-flush">
+	  <% @group_books.each do |book| %>
+	    <li class="list-group-item">
+	      <div class="container">
+	      	<div class="row">
+	      	  <div class="col-2">
+			    <% if book.image.attached? %>
+		      	  <%= image_tag book.image.variant(resize: "100x100"), class: "" %>
+		        <% end %>
+	    	  </div>
+	    	  <div class="col-3">
+		  	    <%= book.title %> 
+			  </div>
+			  <div class="col-2">
+		  	    <%= link_to "authors", book_authors_path(@group, book) %> 
+		  	  </div>
+		  	  <div class="col">
+			    <% if current_user.is_group_admin? %>
+			      <%= link_to "delete",  remove_book_from_group_path(@group, book), method: :delete, data: { confirm: "You sure?" } %> 
+			    <% end %>
+			  </div>
+		    </div>
+		  </div>
+	    </li>
+	  <% end %>
+  </ul>
+  <br>
+  <% if current_user.is_group_admin? %>
+    <p>
+      <%= link_to "add book",  book_in_group_new_path(@group), class: "btn btn-lg btn-primary" %>
+    </p>
+  <% end %>
+</div>

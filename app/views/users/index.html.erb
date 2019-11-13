@@ -1,0 +1,36 @@
+<% provide(:title, 'All users') %>
+
+<div class="container">
+<h1>Users</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Login name</th>
+      <th>Books admin</th>
+      <th>Groups admin</th>
+      <tr></tr>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.login_name %></td>
+        <td>
+          <%= link_to "#{ user.is_books_admin ? 'Take acces' : 'Give acces' }", books_admin_user_path(user), 
+               class: "#{ user.is_books_admin ? 'take-acces' : 'give-acces' }" %>            
+        </td>
+        <td>
+          <%= link_to "#{ user.is_group_admin ? 'Take acces' : 'Give acces' }", groups_admin_user_path(user), 
+               class: "#{ user.is_group_admin ? 'take-acces' : 'give-acces' }"%>         
+        </td>
+        <td>
+          <% if current_user.admin? && !current_user?(user) %>
+            <%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,24 @@
+<% provide(:title, 'Authors of book') %>
+
+<div class="container">
+  <h1>Authors of book: <%= @book.title %></h1>
+
+  <ul class="list-group list-group-flush">
+	<% @book.authors.each do |author| %>
+	  <li class="list-group-item">
+	  	<%= author.full_name %> 
+	  	<div class="dell-button-container">
+		  <% if current_user.is_books_admin? %>
+	  	    <%= link_to "delete",  book_authors_destroy_path(@group, @book, author), method: :delete, data: { confirm: "You sure?" } %> 
+		  <% end %>
+	    </div>
+	  </li>
+	<% end %>
+  </ul>
+  <br>
+  <% if current_user.is_books_admin?  %>
+    <p>
+  	  <%= link_to "add author",  book_authors_new_path(@group, @book), class: "btn btn-lg btn-primary" %>		
+    </p>
+  <% end  %>
+</div>

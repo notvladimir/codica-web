@@ -1,0 +1,12 @@
+angela:
+  login_name: AngelaD
+  password_digest: <%= User.digest('P@ssw0rd') %>
+  is_books_admin: true
+  is_group_admin: true
+  admin: true %>
+
+jhon:
+  login_name: JhonD
+  password_digest: <%= User.digest('P@ssw0rd') %>
+  is_books_admin: true
+  is_group_admin: true %>

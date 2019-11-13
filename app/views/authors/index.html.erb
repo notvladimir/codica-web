@@ -1,0 +1,16 @@
+<% provide(:title, 'Authors') %>
+
+<div class="container">
+  <h1>Authors</h1>
+  <ul class="list-group list-group-flush">
+	<% @authors.each do |author| %>
+	  <li class="list-group-item">
+	  	<%= link_to author.full_name, books_author_path(author) %> 
+	  </li>
+	<% end %>
+  </ul>
+  <br>
+  <% if logged_in? && current_user.is_books_admin?  %>
+    <p><%= link_to "Create new author", new_author_path, class: "btn btn-primary" %> </p>
+  <% end %>
+</div>

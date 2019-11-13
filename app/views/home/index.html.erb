@@ -1,2 +1,36 @@
-<h1>Test heroku</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<% provide(:title, 'Home') %>
+
+<div class="container">
+<% unless logged_in? %>
+  <p></p>
+<% else %>
+  <h1>Books by groups</h1>
+  <ul class="list-group list-group-flush">
+    <% @groups.each do |group| %>
+	  <li class="list-group-item">
+	  	<div class="home-group-name">
+	      <%= group.name %>
+		</div>
+	    <% group.books.each do |book| %>
+		  <ul class="nobull">
+		    <li>
+			  <div class="container">
+	      	    <div class="row">
+	      	      <div class="col-2">
+			 	    <% if book.image.attached? %>
+				      <%= image_tag book.image.variant(resize: "100x100"), class: "" %>
+				    <% end %>
+	    	      </div>
+	    	      <div class="col-3">
+				    <%= book.title %>
+				  </div>
+				</div>
+		      </div>
+		    </li>
+		  </ul>
+	    <% end %>
+	  </li>
+    <% end %>
+  </ul>
+<% end %>
+</div>

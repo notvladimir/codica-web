@@ -1,0 +1,24 @@
+<% provide(:title, 'Author books') %>
+
+<div class="container">
+  <h1>Author: <%= @author.full_name %></h1>
+  <h3>books:</h3>
+  <ul class="list-group list-group-flush">
+	<% @author_books.each do |book| %>
+	  <li  class="list-group-item">
+		<div class="container">
+		  <div class="row">
+	        <div class="col-2">
+	  	      <% if book.image.attached? %>
+      		    <%= image_tag book.image.variant(resize: "100x100"), class: "" %>
+    	      <% end %>
+            </div>
+	        <div class="col">
+	  	      <%= book.title %>
+	  	    </div>
+          </div>
+        </div>
+	  </li>
+	<% end %>
+  </ul>
+</div>

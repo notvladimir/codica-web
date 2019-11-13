@@ -1,0 +1,21 @@
+<% provide(:title, 'Groups of books') %>
+
+<div class="container">
+  <h1>Groups of books</h1>
+  <ul class="list-group list-group-flush">
+ 	<% @groups.each do |group| %>
+	  <li class="list-group-item">
+    	<%= link_to group.name, books_group_path(group) %> 	  	
+	  	<div class="dell-button-container">
+	  	  <% if current_user.is_group_admin? %>
+		    <%= link_to "delete", group, method: :delete, data: { confirm: "You sure?" } %>
+		  <% end %>
+		</div>
+	  </li>
+	<% end %>
+  </ul>
+  <br>
+  <% if current_user.is_group_admin? %>
+	<p><%= link_to "Create group", new_group_path, class: "btn btn-lg btn-primary" %></p>
+  <% end %>
+</div>
